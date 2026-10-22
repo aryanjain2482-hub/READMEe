@@ -1,0 +1,89 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }
+body {
+  font-family: "Nunito", system-ui, sans-serif;
+  color: #0f172a;
+  background-color: #fef9c3;
+  /* manga halftone dots */
+  background-image: radial-gradient(#fde68a 1.6px, transparent 1.6px);
+  background-size: 18px 18px;
+}
+.leaflet-container { font-family: inherit; border-radius: 1rem; }
+
+/* ---------- cartoon building blocks ---------- */
+@layer components {
+  .toon-card {
+    background: #fff;
+    border: 3px solid #0f172a;
+    border-radius: 1.1rem;
+    box-shadow: 4px 4px 0 0 #0f172a;
+  }
+  .toon-title {
+    font-family: "Bangers", Impact, sans-serif;
+    letter-spacing: 0.06em;
+    font-size: 1.15rem;
+    color: #0f172a;
+  }
+  .toon-btn {
+    border: 3px solid #0f172a;
+    border-radius: 0.8rem;
+    box-shadow: 3px 3px 0 0 #0f172a;
+    font-weight: 800;
+    transition: transform .08s, box-shadow .08s;
+  }
+  .toon-btn:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 0 #0f172a; }
+  .toon-btn:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 0 0 0 0 #0f172a; }
+  .toon-btn:disabled { opacity: .5; cursor: not-allowed; }
+  .toon-btn-sm {
+    border: 2px solid #0f172a;
+    border-radius: 0.6rem;
+    box-shadow: 2px 2px 0 0 #0f172a;
+    font-weight: 800;
+    transition: transform .08s, box-shadow .08s;
+  }
+  .toon-btn-sm:hover:not(:disabled) { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 0 #0f172a; }
+  .toon-btn-sm:active:not(:disabled) { transform: translate(2px, 2px); box-shadow: 0 0 0 0 #0f172a; }
+}
+
+.rw-pin { border: 2.5px solid #0f172a; border-radius: 9999px; color: #fff; font-weight: 800;
+  font-size: 11px; display: flex; align-items: center; justify-content: center;
+  box-shadow: 2px 2px 0 rgba(15,23,42,.6); text-shadow: 0 1px 0 rgba(0,0,0,.4); }
+.rw-mascot { filter: drop-shadow(2px 2px 0 rgba(15,23,42,.55)); animation: rw-bob 1.8s ease-in-out infinite; }
+
+/* comic "burst" badge */
+.burst {
+  background: #facc15;
+  border: 3px solid #0f172a;
+  color: #0f172a;
+  clip-path: polygon(50% 0%, 61% 12%, 77% 6%, 80% 22%, 96% 26%, 90% 41%, 100% 54%, 86% 62%,
+    88% 79%, 72% 80%, 64% 95%, 50% 86%, 36% 95%, 28% 80%, 12% 79%, 14% 62%, 0% 54%, 10% 41%,
+    4% 26%, 20% 22%, 23% 6%, 39% 12%);
+}
+
+/* speech bubble (Rooty) */
+.bubble {
+  position: relative;
+  background: #fff;
+  border: 3px solid #0f172a;
+  border-radius: 1.1rem;
+  box-shadow: 3px 3px 0 0 #0f172a;
+}
+.bubble::before {
+  content: "";
+  position: absolute; left: -14px; top: 22px;
+  border: 8px solid transparent; border-right: 12px solid #0f172a;
+}
+.bubble::after {
+  content: "";
+  position: absolute; left: -9px; top: 24px;
+  border: 6px solid transparent; border-right: 10px solid #fff;
+}
+
+@keyframes rw-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-3px) } }
+@keyframes rw-pop { 0% { transform: scale(.6); opacity: 0 } 70% { transform: scale(1.08) } 100% { transform: scale(1); opacity: 1 } }
+.pop-in { animation: rw-pop .35s ease-out; }
+.bob { animation: rw-bob 2s ease-in-out infinite; }
